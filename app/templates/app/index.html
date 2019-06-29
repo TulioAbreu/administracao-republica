@@ -2,8 +2,9 @@
 
 {% block content %}
     <h1>Home</h1>
-    <p>Bem vindo ao site da Peça rara!</p>
+    <p>Bem vindo ao site da Peça rara, {{ user.username }}!</p>
     <p>
         <strong>Total de usuários registrados: </strong>{{ count }}
     </p>
+
 {% endblock %}

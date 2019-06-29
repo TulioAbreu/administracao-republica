@@ -7,5 +7,4 @@ urlpatterns = [
     path('hino', views.hino, name='hino'),
     path('cadastro', views.cadastro, name='cadastro'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('caixa', views.caixa, name='caixa')
-]
+    path('caixa', views.caixa, name='caixa')]
