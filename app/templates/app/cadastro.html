@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 
 	<h1>Cadastro</h1>
 	<p>Insira os dados abaixo para que seja feito o cadastro.</p>
-	<form method="post">
+	<form method="post" novalidate>
 		{% csrf_token %}
-		{{ form.as_p }}
-		<button type="submite">Cadastrar</button>
+		{{ form|crispy }}
+		<button type="submite" class="btn btn-primary">Cadastrar</button>
 	</form>	
 
 {% endblock %}
