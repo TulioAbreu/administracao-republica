@@ -2,7 +2,11 @@
 
 {% block content %}
 
-<h1>Caixa</h1>
-Esta é a página da caixinha.
-
+    {% if user.is_authenticated %}
+        <h1>Caixa</h1>
+        Esta é a página da caixinha.
+    {% else %}
+        <h1>Caixinha</h1>
+        Você não tem permissão para acessar esta página.
+    {% endif %}
 {% endblock %}

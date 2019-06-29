@@ -4,12 +4,16 @@
 
 {% block content %}
 
-	<h1>Cadastro</h1>
-	<p>Insira os dados abaixo para que seja feito o cadastro.</p>
-	<form method="post" novalidate>
-		{% csrf_token %}
-		{{ form|crispy }}
-		<button type="submite" class="btn btn-primary">Cadastrar</button>
-	</form>	
-
+    {% if user.is_authenticated %}
+    	<h1>Cadastro</h1>
+    	<p>Insira os dados abaixo para que seja feito o cadastro.</p>
+    	<form method="post" novalidate>
+    		{% csrf_token %}
+    		{{ form|crispy }}
+    		<button type="submite" class="btn btn-primary">Cadastrar</button>
+    	</form>	
+    {% else %}
+        <h1>Cadastro de morador</h1>
+        Você não tem permissão para acessar esta página.
+    {% endif %}
 {% endblock %}
