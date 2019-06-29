@@ -1,9 +1,15 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
+
 def index(request):
-    return render(request, 'app/index.html')
+    count = User.objects.count()
+
+    context = {
+        'count': count
+    }
+    return render(request, 'app/index.html', context)
 
 
 def hino(request):
@@ -11,22 +17,19 @@ def hino(request):
 
 
 def cadastro(request):
-	if request.method == 'POST':
-		form = UserCreationForm(request.POST)
-		if form.is_valid():
-			form.save()
-			return redirect('index')
-	else:
-		form = UserCreationForm()
-	return render(request, 'app/cadastro.html', {
-		'form': form	
-	})
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = UserCreationForm()
 
-
-def login(request):
-    return render(request, 'app/login.html')
+    context = {
+        'form': form
+    }
+    return render(request, 'app/cadastro.html', context)
 
 
 def caixa(request):
     return render(request, 'app/caixa.html')
-
