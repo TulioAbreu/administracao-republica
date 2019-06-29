@@ -2,9 +2,8 @@
 
 {% block content %}
     <h1>Home</h1>
-    <p>Bem vindo ao site da Peça rara, {{ user.username }}!</p>
+    Bem vindo ao site da república Peça Rara {% if user.is_authenticated %} {{ user.username }} {% endif %} !
     <p>
         <strong>Total de usuários registrados: </strong>{{ count }}
     </p>
-
 {% endblock %}
