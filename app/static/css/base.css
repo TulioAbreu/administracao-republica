@@ -13,8 +13,8 @@ form .alert ul
 }
 body
 {
-    /*background-image: url("../img/background.jpg");*/
-    background-color: white;
+    /*background-image: url("../img/background3.jpg");*/
+    background-color: lightblue;
 }
 
 footer
@@ -84,4 +84,34 @@ li a:hover {
 {
     color:#000!important;
     background-color:darkturquoise!important
+}
+h1, h2, h3, h4, h5, h6
+{
+    color: black;
+}
+h2
+{
+    font-palette: dark;
+    font-family: "Edwardian Script ITC";
+    font-size: 50px;
+    /*background-image: url("../img/moldura.jpg");*/
+}
+
+.holder {
+    display: flex;
+    justify-content: center;
+    color: black;
+}
+.imagem {
+  width: 300px;
+  margin: 10px;
+  position: relative;
+  text-align: center;
+}
+.imagem::after {
+  content: attr(data-title); /* estilo que coloco a legenda no lugar */
+  position: absolute;
+  width: 100%;
+  bottom: -20px;
+  left: 0;
 }

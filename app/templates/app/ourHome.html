@@ -1,1 +1,39 @@
 {% extends 'base.html' %}
+
+{% block content %}
+    {% load static %}
+
+    <h1>Nossa Casinha</h1>
+    <div class="holder">
+        <div class="imagem" data-title="legenda # 1">
+            <img src="{% static "/img/cozinha.jpeg" %}" alt="Cozinha da república Peça Rara" width="300px">
+        </div>
+        <div class="imagem" data-title="legenda # 2">
+            <img src="{% static "/img/quartoAgregada.jpeg" %}" alt="Sala da república Peça Rara" width="300px">
+        </div>
+    </div>
+    <div class="holder">
+        <div class="imagem" data-title="legenda # 1">
+            <img src="{% static "/img/duploDentro.jpeg" %}" alt="Cozinha da república Peça Rara" width="300px">
+        </div>
+        <div class="imagem" data-title="legenda # 2">
+            <img src="{% static "/img/duploFora.jpeg" %}" alt="Sala da república Peça Rara" width="300px">
+        </div>
+    </div>
+    <div class="holder">
+        <div class="imagem" data-title="legenda # 1">
+            <img src="{% static "/img/suite1.jpeg" %}" alt="Cozinha da república Peça Rara" width="300px">
+        </div>
+        <div class="imagem" data-title="legenda # 2">
+            <img src="{% static "/img/suite2.jpeg" %}" alt="Sala da república Peça Rara" width="300px">
+        </div>
+    </div>
+    <div class="holder">
+        <div class="imagem" data-title="legenda # 1">
+            <img src="{% static "/img/sala.jpeg" %}" alt="Cozinha da república Peça Rara" width="300px">
+        </div>
+    </div>
+
+
+
+{% endblock %}
