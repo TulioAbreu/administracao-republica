@@ -14,7 +14,7 @@ form .alert ul
 body
 {
     /*background-image: url("../img/background3.jpg");*/
-    background-color: lightblue;
+    background-color: white;
 }
 
 footer
@@ -63,8 +63,7 @@ ul .navbar-nav{
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 200px;
-  background-color: pink;
+  width: 200px;;
 }
 
 li a {
@@ -80,10 +79,14 @@ li a:hover {
   color: black;
 }
 
-.navbar, .navbar:hover, .dropdown-menu
+.navbar, .navbar:hover
 {
     color:#000!important;
-    background-color:darkturquoise!important
+    background-color:pink!important
+}
+.dropdown-menu
+{
+    background-color:pink!important
 }
 h1, h2, h3, h4, h5, h6
 {
@@ -103,8 +106,8 @@ h2
     color: black;
 }
 .imagem {
-  width: 300px;
-  margin: 10px;
+  width: 600px;
+  margin: 20px;
   position: relative;
   text-align: center;
 }
@@ -114,4 +117,24 @@ h2
   width: 100%;
   bottom: -20px;
   left: 0;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
+#reza
+{
+    /* a ordem dos lados é a mesma que com margens */
+    border-width: 4px 4px 4px 4px; /* aqui, cada lado possui uma borda de largura diferente */
+    border-style: dotted dotted; /* estilos de borda diferentes para cima-baixo e esquerda-direita */
+    border-color: deeppink deeppink deeppink deeppink ; /* uma cor de borda para cada lado */
+    padding: 10px;
+    animation: mymove 5s infinite;
+}
+@-webkit-keyframes mymove {
+  50% {border-color: darkblue;}
 }
