@@ -33,3 +33,6 @@ def cadastro(request):
 
 def caixa(request):
     return render(request, 'app/caixa.html')
+
+def ourHome(request):
+    return render(request, 'app/ourHome.html')
