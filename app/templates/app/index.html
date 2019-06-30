@@ -1,9 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Home</h1>
+    <!--<h1>Home</h1>
+    Isso pode subir para o header de base e aparecer no login
     Bem vindo ao site da república Peça Rara {% if user.is_authenticated %} {{ user.username }} {% endif %} !
     <p>
+         Acrescentar o "cargo" na república: moradora, bixo, semi-bixo, decana e vice-decana
         <strong>Total de usuários registrados: </strong>{{ count }}
     </p>
+
+    <h2> Nossa Casinha!</h2>
+-->
+
+
+
+    {% load static %}
+    <img src="{% static "imagem vaga casa.jpeg" %}" class="img-fluid" alt="Imagem responsiva">
+
 {% endblock %}
