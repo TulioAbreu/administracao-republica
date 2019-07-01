@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 from .models import CustomUser
@@ -33,3 +34,8 @@ class CustomUserChangeForm(UserChangeForm):
         model = CustomUser
         fields = ('username', 'email', 'nome', 'curso', 'periodo')
 
+
+class CaixaForm(ModelForm):
+    class Meta:
+        model = Conta
+        fields = ['mes', 'nome', 'preco', 'setPaid']

@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
     {% if user.is_authenticated %}
         <h1>Caixa</h1>
         Esta é a página da caixinha.
-
-
-
-
-
-
-
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {{ form|crispy }}
+    		<button type="submite" class="btn btn-primary">Cadastrar conta</button>
+        </form>
 
     {% else %}
         <h1>Caixinha</h1>

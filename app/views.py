@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CaixaForm
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -21,16 +21,18 @@ def cadastro(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            userRank = int(request.user.rank)
-            createdRank = int(request.POST['rank'])
-            if userRank >= createdRank:
-                form.save()
-            else:
-                context = {
-                    'form': CustomUserCreationForm(),
-                    'error': 0
-                }
-                return render(request, 'app/cadastro.html', context)
+            form.save()
+
+            # userRank = int(request.user.rank)
+            # createdRank = int(request.POST['rank'])
+            # if userRank >= createdRank:
+            #     form.save()
+            # else:
+            #     context = {
+            #         'form': CustomUserCreationForm(),
+            #         'error': 0
+            #     }
+            #     return render(request, 'app/cadastro.html', context)
             return redirect('index')
     else:
         form = CustomUserCreationForm()
@@ -42,7 +44,19 @@ def cadastro(request):
 
 
 def caixa(request):
-    return render(request, 'app/caixa.html')
+    if request.method == 'POST':
+        form = CaixaForm(request.POST)
+        if form.is_valid():
+            print('Form is valid!!!')
+            form.save()
+            return render(request, 'app/caixa.html')
+        print('Form is NOT valid!!!')
+    else:
+        form = CaixaForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'app/caixa.html', context)
 
 def ourHome(request):
     return render(request, 'app/ourHome.html')
