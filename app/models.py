@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
+from django import forms
 from django.utils.translation import ugettext_lazy as _
 # Create your models here.
 
@@ -45,3 +46,20 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class Caixa:
+    mes = models.IntegerField(default=1)
+
+
+class Conta:
+    mes = models.ForeignKey("Caixa", on_delete=models.CASCADE)
+    nome = models.CharField(max_length=100)
+    preco = models.FloatField(default=0.0)
+    setPaid = models.BooleanField(default=False)
+    # vencimento = models.DateTimeField()
+
+    def paid(self):
+        self.setPaid = True
+
+
