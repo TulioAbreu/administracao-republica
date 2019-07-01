@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% if user.is_authenticated and user.get_rank == 'Decana' or user.get_rank == 'Semi-Decana'  %}
+        <table>
+            <tr>
+                <th>Conta</th>
+                <th>Preço</th>
+                <th>Mês</th>
+                <th>Paga</th>
+            </tr>
+            {% for conta in contas %}
+                <tr>
+                    <td> {{ conta.nome }}</td>
+                    <td> {{ conta.preco }}</td>
+                    <td> {{ conta.mes }}</td>
+                    {% if conta.setPaid%}
+                        <strong><td> ✓ </td></strong>
+                    {% else %}
+                        <td> </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        <br>
+        <br>
+
+        <table>
+            <tr>
+                <th>Moradora</th>
+                <th>Ações</th>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.nome }}</td>
+                    <td>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="username" id="" value="{{ user.nome }}">
+                            <button type="submit">Catar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        Você não tem permissão para acessar esta página.
+    {% endif %}
+{% endblock %}
