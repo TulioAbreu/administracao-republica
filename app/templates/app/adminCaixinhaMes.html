@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% if success is not None %}
+        <div class="alert alert-success" role="alert">
+            {{ success }}    
+        </div>
+    {% endif %}
+
+    {% if user.is_authenticated and user.get_rank == 'Decana' or user.get_rank == 'Semi-Decana'  %}
+        <p>        
+            Selecione o mês que deseja visualizar:
+        </p>
+        <!-- TODO -->
+        <!-- Colocar isso tudo na mesma linha -->
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-secondary">Selecionar</button>
+        </form>        
+
+        <br>
+
+        {% if mes is not None %}
+            <table class="table">
+                <thead>            
+                    <tr>
+                        <th scope="col">Moradora</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>            
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.nome }}</td>
+                            <td>{{ valor|floatformat:"2" }}</td>
+                            <td>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id_conta" id="" value="{{ user.id }}">
+                                    <button type="submit" class="btn btn-success" onclick="return confirm('Tem certeza que deseja remover esta moradora do sistema?')">Pagar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        {% endif %}
+    {% else %}
+        Você não tem permissão para acessar esta página.
+    {% endif %}
+{% endblock %}

@@ -13,4 +13,5 @@ urlpatterns = [
     path('administracaoUsuarios', views.adminUsers,
          name='administracaoUsuarios'),
     path('administracaoContas', views.adminContas, name='administracaoContas'),
+    path('administracaoCaixinha', views.adminCaixinhaMes, name='administracaoCaixinha'),
 ]

@@ -13,7 +13,7 @@
             <thead>            
                 <tr>
                     <th scope="col">Conta</th>
-                    <th scope="col">Preço</th>
+                    <th scope="col">Preço (R$)</th>
                     <th scope="col">Mês</th>
                     <th scope="col">Paga</th>
                 </tr>
@@ -22,17 +22,37 @@
                 {% for conta in contas %}
                     <tr>
                         <td> {{ conta.nome }}</td>
-                        <td> {{ conta.preco }}</td>
+                        <td> {{ conta.preco|floatformat:"2" }}</td>
                         <td> {{ conta.mes }}</td>
-                        {% if conta.setPaid %}
-                            <strong><td> ✓ </td></strong>
-                        {% else %}
-                            <td> </td>
-                        {% endif %}
+                        <td>
+                            {% if conta.setPaid %}
+                                <strong>✓</strong>
+                            {% else %}                                
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id_conta" id="" value="{{ conta.id }}"/>
+                                    <input type="hidden" name="action" value="pagarConta"/>
+                                    <button type="submit" class="btn btn-success" onclick="return confirm('Tem certeza que deseja considerar esta conta como paga?')">
+                                        Pagar
+                                    </button>
+                                </form>
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+
+        <p>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="excluirContas" id="" value="{{ 'excluirContas' }}">
+                <input type="hidden" name="action" value="excluirContas">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir todas as contas a serem pagas do sistema?')">
+                    Limpar Contas
+                </button>
+            </form>
+        </p>
     {% else %}
         Você não tem permissão para acessar esta página.
     {% endif %}

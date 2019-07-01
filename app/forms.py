@@ -9,6 +9,12 @@ from .models import Conta
 User = get_user_model()
 
 
+class escolherMesForm(ModelForm):
+    class Meta:
+        model = Conta
+        fields = ['mes']
+
+
 class CustomUserCreationForm(UserCreationForm):
     RANK_CHOICES = (
         (1, "Bixo"),
