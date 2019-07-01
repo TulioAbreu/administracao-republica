@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm, CaixaForm
 from django.contrib.auth import get_user_model
-from .models import Caixa, Conta
+from .models import Caixa, Conta, CustomUser
 
 User = get_user_model()
 
@@ -70,8 +70,15 @@ def ourHome(request):
 
 
 def admin(request):
+    if request.method == 'POST':
+        print(request.POST.get('username'))
+        print(request.POST.get('username'))
+        print(request.POST.get('username'))
+        print(request.POST.get('username'))
+        print(request.POST.get('username'))
     context = {
         "caixas": list(Caixa.objects.get_queryset()),
-        "contas": list(Conta.objects.get_queryset())
+        "contas": list(Conta.objects.get_queryset()),
+        "users": list(CustomUser.objects.get_queryset())
     }
     return render(request, 'app/admin.html', context)
