@@ -21,7 +21,16 @@ def cadastro(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            userRank = int(request.user.rank)
+            createdRank = int(request.POST['rank'])
+            if userRank >= createdRank:
+                form.save()
+            else:
+                context = {
+                    'form': CustomUserCreationForm(),
+                    'error': 0
+                }
+                return render(request, 'app/cadastro.html', context)
             return redirect('index')
     else:
         form = CustomUserCreationForm()
