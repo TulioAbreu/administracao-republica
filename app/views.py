@@ -83,3 +83,22 @@ def admin(request):
     context['contas'] = list(Caixa.objects.get_queryset())
     context['users'] = list(CustomUser.objects.get_queryset())
     return render(request, 'app/admin.html', context)
+
+
+def adminUsers(request):
+    context = {}
+    if request.method == 'POST':
+        deleted_user_id = request.POST.get('username')
+        user = CustomUser.objects.get(pk=deleted_user_id)
+        user.delete()
+        context["success"] = "A moradora foi excluída do sistema!"
+
+    context['users'] = list(CustomUser.objects.get_queryset())
+    return render(request, 'app/adminUsers.html', context)
+
+
+def adminContas(request):
+    context = {}
+    context['caixas'] = list(Caixa.objects.get_queryset())
+    context['contas'] = list(Caixa.objects.get_queryset())
+    return render(request, 'app/adminContas.html', context)

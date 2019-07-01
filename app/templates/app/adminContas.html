@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% if success is not None %}
+        <div class="alert alert-success" role="alert">
+            {{ success }}    
+        </div>
+    {% endif %}
+
+    {% if user.is_authenticated and user.get_rank == 'Decana' or user.get_rank == 'Semi-Decana'  %}
+        <table  class="table">
+            <thead>            
+                <tr>
+                    <th scope="col">Conta</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Mês</th>
+                    <th scope="col">Paga</th>
+                </tr>
+            </thead>
+            <tbody>            
+                {% for conta in contas %}
+                    <tr>
+                        <td> {{ conta.nome }}</td>
+                        <td> {{ conta.preco }}</td>
+                        <td> {{ conta.mes }}</td>
+                        {% if conta.setPaid %}
+                            <strong><td> ✓ </td></strong>
+                        {% else %}
+                            <td> </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        Você não tem permissão para acessar esta página.
+    {% endif %}
+{% endblock %}

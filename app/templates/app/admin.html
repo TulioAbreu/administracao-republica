@@ -45,7 +45,7 @@
                         <form method="post">
                             {% csrf_token %}
                             <input type="hidden" name="username" id="" value="{{ user.id }}">
-                            <button type="submit" onclick="return confirm('Tem certeza que deseja remover esta moradora do sistema?')">Catar</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja remover esta moradora do sistema?')">Catar</button>
                         </form>
                     </td>
                 </tr>

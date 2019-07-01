@@ -40,7 +40,10 @@
                             {% endif %}
                             {% if user.get_rank == 'Decana' or user.get_rank == 'Semi-Decana' %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'administracao' %}">Administração</a>
+                                    <a class="nav-link" href="{% url 'administracaoUsuarios' %}">Adm. Moradores</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'administracaoContas' %}">Adm. Contas</a>
                                 </li>
                             {% endif %}
                         {% endif %}

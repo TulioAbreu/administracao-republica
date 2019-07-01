@@ -10,17 +10,16 @@
         </p>
     
         <p>
-            <!-- TODO -->
-            <!-- Colocar aqui um quadrinho flash de Sucesso (fundo verdinho) -->
-            <div>
-                {{ success }}
-            </div>
-            
-            <!-- TODO -->
-            <!-- Colocar aqui um quadrinho flash de erro (fundo vermelho) -->
-            <div>
-                {{ error }}
-            </div>
+            {% if success is not None%}
+                <div class="alert alert-success" role="alert">
+                    {{ success }}    
+                </div>
+            {% endif %}
+            {% if error is not None%}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
         </p>
 
         <form method="post" novalidate>
