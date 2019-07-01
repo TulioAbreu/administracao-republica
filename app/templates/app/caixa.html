@@ -5,7 +5,24 @@
 
     {% if user.is_authenticated %}
         <h1>Caixa</h1>
-        Esta é a página da caixinha.
+        <p>
+            Esta é a página da caixinha.
+        </p>
+    
+        <p>
+            <!-- TODO -->
+            <!-- Colocar aqui um quadrinho flash de Sucesso (fundo verdinho) -->
+            <div>
+                {{ success }}
+            </div>
+            
+            <!-- TODO -->
+            <!-- Colocar aqui um quadrinho flash de erro (fundo vermelho) -->
+            <div>
+                {{ error }}
+            </div>
+        </p>
+
         <form method="post" novalidate>
             {% csrf_token %}
             {{ form|crispy }}

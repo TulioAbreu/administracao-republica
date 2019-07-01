@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm, CaixaForm
 from django.contrib.auth import get_user_model
+from .models import Caixa, Conta
 
 User = get_user_model()
 
@@ -22,17 +23,16 @@ def cadastro(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-
-            # userRank = int(request.user.rank)
-            # createdRank = int(request.POST['rank'])
-            # if userRank >= createdRank:
-            #     form.save()
-            # else:
-            #     context = {
-            #         'form': CustomUserCreationForm(),
-            #         'error': 0
-            #     }
-            #     return render(request, 'app/cadastro.html', context)
+            userRank = int(request.user.rank)
+            createdRank = int(request.POST['rank'])
+            if userRank >= createdRank:
+                form.save()
+            else:
+                context = {
+                    'form': CustomUserCreationForm(),
+                    'error': 0
+                }
+                return render(request, 'app/cadastro.html', context)
             return redirect('index')
     else:
         form = CustomUserCreationForm()
@@ -47,10 +47,17 @@ def caixa(request):
     if request.method == 'POST':
         form = CaixaForm(request.POST)
         if form.is_valid():
-            print('Form is valid!!!')
             form.save()
-            return render(request, 'app/caixa.html')
-        print('Form is NOT valid!!!')
+            context = {
+                "success": "Conta salva com sucesso!",
+                "form": CaixaForm()
+            }
+        else:
+            context = {
+                "error": "Não foi possível salvar esta conta. Preencha corretamente o formulário.",
+                "form": CaixaForm()
+            }
+        return render(request, 'app/caixa.html', context)
     else:
         form = CaixaForm()
     context = {
@@ -60,3 +67,11 @@ def caixa(request):
 
 def ourHome(request):
     return render(request, 'app/ourHome.html')
+
+
+def admin(request):
+    context = {
+        "caixas": list(Caixa.objects.get_queryset()),
+        "contas": list(Conta.objects.get_queryset())
+    }
+    return render(request, 'app/admin.html', context)

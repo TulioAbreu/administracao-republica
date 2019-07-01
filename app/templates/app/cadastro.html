@@ -3,9 +3,8 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-
     {% if user.is_authenticated and user.get_rank == 'Decana' or user.get_rank == 'Semi-Decana' or user.get_rank == 'Moradora' %}
-    	<h1>Cadastro</h1>
+    <h1>Cadastro</h1>
     	<p>Insira os dados abaixo para que seja feito o cadastro.</p>
 
         {% if error is not None and error == 0 %}

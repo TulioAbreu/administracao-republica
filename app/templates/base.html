@@ -38,6 +38,11 @@
                                     <a class="nav-link" href="{% url 'cadastro' %}">Cadastrar Moradora</a>
                                 </li>
                             {% endif %}
+                            {% if user.get_rank == 'Decana' or user.get_rank == 'Semi-Decana' %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'administracao' %}">Administração</a>
+                                </li>
+                            {% endif %}
                         {% endif %}
                     </ul>
                     {% if user.is_authenticated %}
@@ -72,7 +77,7 @@
 
 
 
-   <<footer>
+   <footer>
        <div class="container">
            {% load static %}
            <img src="{% static "logo.jpg" %}" alt="Logo da república Peça Rara" height="50">
