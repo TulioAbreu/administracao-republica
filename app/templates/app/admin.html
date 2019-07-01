@@ -2,6 +2,10 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+    <!-- TODO -->
+    <!-- Mensagem Flash aqui, de sucesso! -->
+    {{ success }}
+
     {% if user.is_authenticated and user.get_rank == 'Decana' or user.get_rank == 'Semi-Decana'  %}
         <table>
             <tr>
@@ -30,16 +34,18 @@
         <table>
             <tr>
                 <th>Moradora</th>
+                <th>Rank</th>
                 <th>Ações</th>
             </tr>
             {% for user in users %}
                 <tr>
                     <td>{{ user.nome }}</td>
+                    <td>{{ user.get_rank }}</td>
                     <td>
                         <form method="post">
                             {% csrf_token %}
-                            <input type="hidden" name="username" id="" value="{{ user.nome }}">
-                            <button type="submit">Catar</button>
+                            <input type="hidden" name="username" id="" value="{{ user.id }}">
+                            <button type="submit" onclick="return confirm('Tem certeza que deseja remover esta moradora do sistema?')">Catar</button>
                         </form>
                     </td>
                 </tr>

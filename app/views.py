@@ -65,20 +65,21 @@ def caixa(request):
     }
     return render(request, 'app/caixa.html', context)
 
+
 def ourHome(request):
     return render(request, 'app/ourHome.html')
 
 
 def admin(request):
+    context = {}
+
     if request.method == 'POST':
-        print(request.POST.get('username'))
-        print(request.POST.get('username'))
-        print(request.POST.get('username'))
-        print(request.POST.get('username'))
-        print(request.POST.get('username'))
-    context = {
-        "caixas": list(Caixa.objects.get_queryset()),
-        "contas": list(Conta.objects.get_queryset()),
-        "users": list(CustomUser.objects.get_queryset())
-    }
+        deleted_user_id = request.POST.get('username')
+        user = CustomUser.objects.get(pk=deleted_user_id)
+        user.delete()
+        context["success"] = "A moradora foi excluída do sistema!"
+
+    context['caixas'] = list(Caixa.objects.get_queryset())
+    context['contas'] = list(Caixa.objects.get_queryset())
+    context['users'] = list(CustomUser.objects.get_queryset())
     return render(request, 'app/admin.html', context)
