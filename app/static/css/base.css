@@ -1,69 +1,70 @@
-.asteriskField
-{
-    display: none;
-}
-form .alert ul li
-{
-    list-style: none;
-}
-form .alert ul
-{
-    padding: 0;
-    margin: 0;
-}
-body
-{
-    /*background-image: url("../img/background3.jpg");*/
-    background-color: white;
+.asteriskField {
+  display: none;
 }
 
-footer
-{
-    background: pink;
-    clear: both;
-    position: relative;
-    padding: 20px 0;
+form .alert ul li {
+  list-style: none;
 }
+
+form .alert ul {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  /*background-image: url("../img/background3.jpg");
+  */
+  background-color: white;
+}
+
+footer {
+  background: pink;
+  clear: both;
+  position: relative;
+  padding: 20px 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 footer .container {
-   position: relative;
- }
+  position: relative;
+}
 
-.social
-{
-    position: absolute;
-    top: 12px;
-    right: 0;
+.social {
+  position: absolute;
+  top: 12px;
+  right: 0;
 }
-.social li
-{
-    float: left;
-    margin-left: 25px;
+
+.social li {
+  float: left;
+  margin-left: 25px;
 }
-.social a[href*="instagram.com"]
-{
-    background-image: url("../img/instagram.jpg");
-    /*Achar uma imagem melhor para logo do insta*/
+
+.social a[href*="instagram.com"] {
+  background-image: url("../img/instagram.jpg");
+  /*Achar uma imagem melhor para logo do insta*/
 }
-.social a[href*="facebook.com"]
-{
-    background-image: url("../img/facebook.png");
+
+.social a[href*="facebook.com"] {
+  background-image: url("../img/facebook.png");
 }
 
 .social a {
-   /* tamanho da imagem */
-   height: 32px;
-   width: 32px;
+  /* tamanho da imagem */
+  height: 32px;
+  width: 32px;
+  /* image replacement */
+  display: block;
+  text-indent: -9999px;
+}
 
-   /* image replacement */
-   display: block;
-   text-indent: -9999px;
- }
-
-ul .navbar-nav{
+ul .navbar-nav {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 200px;;
+  width: 200px;
+  ;
 }
 
 li a {
@@ -73,46 +74,57 @@ li a {
   text-decoration: none;
 }
 
+
 /* Change the link color on hover */
+
 li a:hover {
   background-color: paleturquoise;
   color: black;
 }
 
-.navbar, .navbar:hover
-{
-    color:#000!important;
-    background-color:pink!important
+.navbar,
+.navbar:hover {
+  color: #000!important;
+  background-color: pink!important
 }
-.dropdown-menu
-{
-    background-color:pink!important
+
+.dropdown-menu {
+  background-color: pink!important
 }
-h1, h2, h3, h4, h5, h6
-{
-    color: black;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: black;
 }
-h2
-{
-    font-palette: dark;
-    font-family: "Edwardian Script ITC";
-    font-size: 50px;
-    /*background-image: url("../img/moldura.jpg");*/
+
+h2 {
+  font-palette: dark;
+  font-family: "Edwardian Script ITC";
+  font-size: 50px;
+  /*background-image: url("../img/moldura.jpg");
+  */
 }
 
 .holder {
-    display: flex;
-    justify-content: center;
-    color: black;
+  display: flex;
+  justify-content: center;
+  color: black;
 }
+
 .imagem {
   width: 600px;
   margin: 20px;
   position: relative;
   text-align: center;
 }
+
 .imagem::after {
-  content: attr(data-title); /* estilo que coloco a legenda no lugar */
+  content: attr(data-title);
+  /* estilo que coloco a legenda no lugar */
   position: absolute;
   width: 100%;
   bottom: -20px;
@@ -126,15 +138,20 @@ h2
   width: 75%;
 }
 
-#reza
-{
-    /* a ordem dos lados é a mesma que com margens */
-    border-width: 4px 4px 4px 4px; /* aqui, cada lado possui uma borda de largura diferente */
-    border-style: dotted dotted; /* estilos de borda diferentes para cima-baixo e esquerda-direita */
-    border-color: deeppink deeppink deeppink deeppink ; /* uma cor de borda para cada lado */
-    padding: 10px;
-    animation: mymove 5s infinite;
+#reza {
+  /* a ordem dos lados é a mesma que com margens */
+  border-width: 4px 4px 4px 4px;
+  /* aqui, cada lado possui uma borda de largura diferente */
+  border-style: dotted dotted;
+  /* estilos de borda diferentes para cima-baixo e esquerda-direita */
+  border-color: deeppink deeppink deeppink deeppink;
+  /* uma cor de borda para cada lado */
+  padding: 10px;
+  animation: mymove 5s infinite;
 }
+
 @-webkit-keyframes mymove {
-  50% {border-color: darkblue;}
+  50% {
+      border-color: darkblue;
+  }
 }

@@ -57,14 +57,23 @@ class Caixa(models.Model):
         else:
             return "Null"
 
+class MoradorPagouCaixa(models.Model):
+    morador = models.ForeignKey("CustomUser", on_delete=models.CASCADE)
+    caixa = models.ForeignKey(Caixa, on_delete=models.CASCADE)
+    pago = models.BooleanField(default=False)
+    
+    class Meta:
+        unique_together = ('morador', 'caixa')
+
 class Conta(models.Model):
     mes = models.ForeignKey("Caixa", on_delete=models.CASCADE)
     nome = models.CharField(max_length=100)
     preco = models.FloatField(default=0.0)
     setPaid = models.BooleanField(verbose_name="Paga", default=False)
-    # vencimento = models.DateTimeField()
 
     def paid(self):
         self.setPaid = True
 
+    def __str__(self):
+        return 'Conta (nome: %s; preco: %s; mes: %s)' % (self.nome, self.preco, self.mes)
 

@@ -2,53 +2,59 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    {% if success is not None %}
-        <div class="alert alert-success" role="alert">
-            {{ success }}    
-        </div>
-    {% endif %}
+{% if success is not None %}
+<div class="alert alert-success" role="alert">
+    {{ success }}
+</div>
+{% endif %}
 
-    {% if user.is_authenticated and user.get_rank == 'Decana' or user.get_rank == 'Semi-Decana'  %}
-        <table class="table">
-            <thead>            
-                <tr>
-                    <th scope="col">Moradora</th>
-                    <th scope="col">Rank</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>            
-                {% for user in users %}
-                    <tr>
-                        <td>{{ user.nome }}</td>
-                        <td>{{ user.get_rank }}</td>
-                        <td>
-                            <form method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="action" id="" value="catar">                                
-                                <input type="hidden" name="id_conta" id="" value="{{ user.id }}">
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja remover esta moradora do sistema?')">Catar</button>
-                            </form>
-                            <br>
-                            <form method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="action" id="" value="subir">                                
-                                <input type="hidden" name="id_conta" id="" value="{{ user.id }}">
-                                <button type="submit" class="btn btn-info" onclick="return confirm('Tem certeza que deseja aumentar a hierarquia desta moradora?')">Subir hierarquia</button>
-                            </form>
-                            <br>
-                            <form method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="action" id="" value="descer">                                
-                                <input type="hidden" name="id_conta" id="" value="{{ user.id }}">
-                                <button type="submit" class="btn btn-warning" onclick="return confirm('Tem certeza que deseja aumentar a hierarquia desta moradora?')">Descer hierarquia</button>
-                            </form>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        Você não tem permissão para acessar esta página.
-    {% endif %}
+{% if user.is_authenticated and user.get_rank == 'Decana' or user.get_rank == 'Semi-Decana'  %}
+<h1>Relação de moradoras da casa</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Moradora</th>
+            <th scope="col">Rank</th>
+            <th scope="col">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.nome }}</td>
+            <td>{{ user.get_rank }}</td>
+            <td>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" id="" value="catar">
+                    <input type="hidden" name="id_conta" id="" value="{{ user.id }}">
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Tem certeza que deseja remover esta moradora do sistema?')">Catar</button>
+                </form>
+                <br>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" id="" value="subir">
+                    <input type="hidden" name="id_conta" id="" value="{{ user.id }}">
+                    <button type="submit" class="btn btn-info"
+                        onclick="return confirm('Tem certeza que deseja aumentar a hierarquia desta moradora?')">Subir
+                        hierarquia</button>
+                </form>
+                <br>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" id="" value="descer">
+                    <input type="hidden" name="id_conta" id="" value="{{ user.id }}">
+                    <button type="submit" class="btn btn-warning"
+                        onclick="return confirm('Tem certeza que deseja aumentar a hierarquia desta moradora?')">Descer
+                        hierarquia</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+Você não tem permissão para acessar esta página.
+{% endif %}
 {% endblock %}

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm, CaixaForm, escolherMesForm
 from django.contrib.auth import get_user_model
-from .models import Caixa, Conta, CustomUser
+from .models import Caixa, Conta, CustomUser, MoradorPagouCaixa
 
 User = get_user_model()
 
@@ -22,7 +22,7 @@ def cadastro(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            # form.save()
             userRank = int(request.user.rank)
             createdRank = int(request.POST['rank'])
             if userRank >= createdRank:
@@ -43,6 +43,25 @@ def cadastro(request):
     return render(request, 'app/cadastro.html', context)
 
 
+def updateUsersPaidBill():
+    users = list(CustomUser.objects.get_queryset())
+    vaults = list(Caixa.objects.get_queryset())
+    for _vault in vaults:
+        print(_vault)
+        for _user in users:
+            print(_user)
+            assoc =  MoradorPagouCaixa.objects.filter(morador=_user).filter(caixa=_vault)
+            print(assoc)
+            if len(list(assoc)) == 0:
+                # Tenho que criar
+                mpc = MoradorPagouCaixa()
+                mpc.morador = _user
+                mpc.caixa = _vault
+                mpc.save()
+            else:
+                pass
+
+
 def caixa(request):
     if request.method == 'POST':
         form = CaixaForm(request.POST)
@@ -52,6 +71,7 @@ def caixa(request):
                 "success": "Conta salva com sucesso!",
                 "form": CaixaForm()
             }
+            updateUsersPaidBill();
         else:
             context = {
                 "error": "Não foi possível salvar esta conta. Preencha corretamente o formulário.",
@@ -117,11 +137,34 @@ def adminUsers(request):
 def adminCaixinhaMes(request):
     context = {}
     if request.method == 'POST':
-        mes_selecionado = request.POST.get('mes')
-        context['mes'] = 1
-        context['users'] = list(CustomUser.objects.get_queryset())
-        context['valor'] = sum([conta.preco for conta in list(Conta.objects.get_queryset()) 
-                                if int(mes_selecionado) == int(conta.mes.mes)])/CustomUser.objects.count()
+        action = request.POST.get('action')
+        if action == 'selectMonth':
+            mes_selecionado = request.POST.get('mes')
+            context['mes'] = mes_selecionado
+            context['valor'] = sum([conta.preco for conta in list(Conta.objects.get_queryset()) 
+                                    if int(mes_selecionado) == int(conta.mes.mes)])/CustomUser.objects.count()
+            context['usersPago'] = zip(
+                list(CustomUser.objects.get_queryset()),
+                [e.pago for e in MoradorPagouCaixa.objects.filter(caixa=str(mes_selecionado))]
+            )
+        elif action == 'setPaid':
+            id_user = request.POST.get('id_user')
+            id_mes = request.POST.get('id_mes')
+            print(id_user)
+            print(id_mes)
+            mpc = MoradorPagouCaixa.objects.filter(caixa=id_mes).filter(morador_id=id_user)[0]
+            mpc.pago = True
+            mpc.save()
+
+            mes_selecionado = id_mes
+            context['mes'] = id_mes
+            context['valor'] = sum([conta.preco for conta in list(Conta.objects.get_queryset()) 
+                                    if int(mes_selecionado) == int(conta.mes.mes)])/CustomUser.objects.count()
+            context['usersPago'] = zip(
+                list(CustomUser.objects.get_queryset()),
+                [e.pago for e in MoradorPagouCaixa.objects.filter(caixa=str(mes_selecionado))]
+            )
+
     context['form'] = escolherMesForm()
     return render(request, 'app/adminCaixinhaMes.html', context)
 
