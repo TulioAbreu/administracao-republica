@@ -183,6 +183,9 @@ def adminContas(request):
             objectList = list(Conta.objects.get_queryset())
             for obj in objectList:
                 obj.delete()
+            objectList = list(MoradorPagouCaixa.objects.get_queryset())
+            for obj in objectList:
+                obj.delete()
             context['success'] = "Todas contas foram excluídas do sistema!"
 
     context['caixas'] = list(Caixa.objects.get_queryset())
