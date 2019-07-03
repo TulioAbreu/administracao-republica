@@ -1,4 +1,4 @@
-# Trabalho Prático de Programação Web
+# Trabalho Prático de Programação Web desenvolvido pelos alunos Marco Túlio Abreu e Layla Miranda
 •	Este trabalho foi desenvolvido utilizando HTML5, CSS3 e Django 2.2;
 
 •	Com o objetivo de aumentar a responsividade do site, foi utilizado Bootstrap4;
